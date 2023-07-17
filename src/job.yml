@@ -1,15 +1,15 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: model
 command: >-
-  python 
-  --
-  --
+  python train.py
+  --diabetes-dev-csv ${{inputs.diabetes-dev_csv}}/diabetes-dev.csv
+  --reg_rate ${{inputs.reg_rate}}
 inputs:
   training_data: 
     type: uri_folder 
     path: https://github.com/aimazin/mslearn-mlops/edit/main/experimentation/
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: 
+compute: azureml:cpu-cluster
 experiment_name: diabetes-dev-folder
 description: Run Training
